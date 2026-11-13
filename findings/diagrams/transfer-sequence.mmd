@@ -1,0 +1,12 @@
+sequenceDiagram
+  participant S as Sender
+  participant R as Receiver
+  S->>R: ProcessTransferOpRequest(metadata)
+  R-->>S: Accept/reject
+  R->>S: StartTransfer(op)
+  loop each file/chunk
+    S-->>R: FileChunk(relative_path, type, bytes, metadata)
+  end
+  R->>R: Reconstruct validated destination
+  R-->>S: StopTransfer(success/error)
+  S->>R: Cancel/Pause optional

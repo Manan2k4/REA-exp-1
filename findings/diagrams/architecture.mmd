@@ -1,0 +1,13 @@
+flowchart TD
+  App[WarpinatorApp] --> Main[MainActivity]
+  Main --> Svc[MainService foreground dataSync]
+  Svc --> Server[Server / JmDNS / gRPC]
+  Svc --> Peers[Remote peer model]
+  Server --> Grpc[GrpcService callbacks]
+  Grpc --> Transfer[Transfer and FileChunk streaming]
+  Main --> Settings[SettingsActivity]
+  Main --> Transfers[TransfersActivity]
+  Share[ShareActivity SEND] --> Svc
+  Boot[Autostart receiver] --> Svc
+  Tile[Quick Settings tile] --> Svc
+  Provider[Non-exported FileProvider] --> Share

@@ -1,0 +1,12 @@
+sequenceDiagram
+  participant A as Android device
+  participant D as JmDNS LAN
+  participant B as Peer
+  A->>A: Start foreground service
+  A->>D: Advertise Warpinator service
+  D-->>A: Resolve peer service metadata
+  A->>B: UDP certificate request / registration
+  B-->>A: Boxed certificate
+  A->>B: gRPC TLS channel
+  B-->>A: Peer information and availability
+  A->>B: Transfer operation RPC
